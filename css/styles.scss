@@ -618,20 +618,20 @@ nav {
     margin-left: -186.5px;
 }
 
-.slick-arrow {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #000;
-    color: #fff;
-    position: absolute;
-    border: none;
-    cursor: pointer;
-}
+// .slick-arrow {
+//     width: 50px;
+//     height: 50px;
+//     border-radius: 50%;
+//     background: #000;
+//     color: #fff;
+//     position: absolute;
+//     border: none;
+//     cursor: pointer;
+// }
 
-.slick-arrow:focus {
-    outline: none;
-}
+// .slick-arrow:focus {
+//     outline: none;
+// }
 
 
 .invitation-form__button-arrow {
@@ -687,36 +687,6 @@ nav {
 
 .feedback .slick-track {
     margin: 30px 0;
-}
-
-.slick-p {
-    color: #d4d4d5;
-    position: absolute;
-    z-index: 20;
-    top: 40px;
-    left: 0px;
-    background: transparent;
-    transition: all 0.4s ease-out;
-}
-
-.slick-p:hover {
-    left: -5px;
-    color: #8e8e96;
-}
-
-.slick-n {
-    color: #d4d4d5;
-    position: absolute;
-    z-index: 20;
-    top: 40px;
-    right: 0px;
-    background: transparent;
-    transition: all 0.4s ease-out;
-}
-
-.slick-n:hover {
-    right: -5px;
-    color: #8e8e96;
 }
 
 .feedback__title {
@@ -1544,6 +1514,7 @@ nav {
     .gallery-section-subtitle {
         color: #8c8f94;
         text-align: center;
+        padding: 25px;
     }
 
     .subscribe-container {
@@ -1556,6 +1527,6 @@ nav {
         padding-bottom: 120px;
     }
 
- 
+
 
 }

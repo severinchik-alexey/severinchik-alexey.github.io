@@ -46,6 +46,7 @@ $(function () {
         responsive: [{
             breakpoint: 992,
             settings: {
+                arrows:false,
                 centerMode: !0,
                 centerPadding: "40px",
                 slidesToShow: 1
@@ -53,6 +54,7 @@ $(function () {
         }, {
             breakpoint: 768,
             settings: {
+                arrows:false,
                 centerMode: !0,
                 centerPadding: "40px",
                 slidesToShow: 1
@@ -60,6 +62,7 @@ $(function () {
         }, {
             breakpoint: 420,
             settings: {
+                arrows:false,
                 centerMode: !0,
                 centerPadding: "0",
                 slidesToShow: 1
@@ -67,6 +70,7 @@ $(function () {
         },    {
                 breakpoint: 340,
                 settings: {
+                    arrows:false,
                     centerMode: !0,
                     centerPadding: "20px",
                     slidesToShow: 1
