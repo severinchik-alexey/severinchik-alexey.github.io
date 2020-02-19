@@ -41,7 +41,7 @@ function createForm(form, formDef) {
                 createElem('email');
                 break;
             case 'number':
-                createElem('number');
+                createElem('number'); //добавить в функцию
                 break;
             case 'check':
                 createElem('checkbox');
