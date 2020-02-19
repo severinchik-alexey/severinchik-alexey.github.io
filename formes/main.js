@@ -58,15 +58,15 @@ function createForm(form, formDef) {
                 }
                 break;
             case 'radio':
-                let divRadio = document.createElement('div');
-                div.appendChild(divRadio);
+                let elemRadio = document.createElement('div');
+                div.appendChild(elemRadio);
                 for (let item of key.options) {
                     let input = document.createElement('input');
-                    divRadio.appendChild(input);
+                    elemRadio.appendChild(input);
                     input.name = 'position';
                     input.type = 'radio';
                     let labelRadio = document.createElement('label');
-                    divRadio.appendChild(labelRadio);
+                    elemRadio.appendChild(labelRadio);
                     labelRadio.innerText = item.text;
                 }
                 break;
