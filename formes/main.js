@@ -67,7 +67,7 @@ function createForm(form, formDef) {
                     divRadio.appendChild(input);
                     input.name = 'position';
                     input.type = 'radio';
-                    input.id = ++i;
+                    input.id = i++;
                     let labelRadio = document.createElement('label');
                     divRadio.appendChild(labelRadio);
                     labelRadio.innerText = item.text;
