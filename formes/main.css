@@ -1,1 +1,24 @@
+form {
+    margin-bottom: 40px;
+    padding: 25px;
+}
 
+.label {
+    flex-basis: 250px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.input {
+    min-height: 20px;
+}
+
+.textarea {
+    resize: vertical;
+    width: 48%;
+}
+
+.div {
+    display: flex;
+    margin-top: 8px;
+}
