@@ -50,8 +50,6 @@ function createForm(form, formDef) {
                 let select = document.createElement('select');
                 div.appendChild(select).classList.add('select');
                 select.name = key.name;
-                select.id = select.name + i++;
-                label.htmlFor = select.id;
                 for (let item of key.options) {
                     let option = document.createElement('option');
                     select.appendChild(option);
@@ -67,19 +65,15 @@ function createForm(form, formDef) {
                     divRadio.appendChild(input);
                     input.name = 'position';
                     input.type = 'radio';
-                    input.id = i++;
                     let labelRadio = document.createElement('label');
                     divRadio.appendChild(labelRadio);
                     labelRadio.innerText = item.text;
-                    labelRadio.htmlFor = i;
                 }
                 break;
             case 'memo':
                 let textarea = document.createElement('textarea');
                 div.appendChild(textarea).classList.add('textarea');
                 textarea.name = key.name;
-                textarea.id = textarea.name + i++;
-                label.htmlFor = textarea.id;
                 break;
             case 'submit':
                 createElem('submit');
@@ -91,8 +85,6 @@ function createForm(form, formDef) {
         function createElem(type) {
             let input = document.createElement('input');
             div.appendChild(input).classList.add('input');
-            input.id = form.name + i++;
-            label.htmlFor = input.id;
             input.type = type;
             input.name = key.name;
             if (key.kind === 'submit') {
