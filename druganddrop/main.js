@@ -1,9 +1,9 @@
 let balls = document.querySelectorAll('img');
 for (let ball of balls) {
     ball.onmousedown = function (eo) {
-        let rec = ball.getBoundingClientRect();
-        let shiftX = eo.clientX - rec.left;
-        let shiftY = eo.clientY - rec.top;
+//         let rec = ball.getBoundingClientRect();
+        let shiftX = eo.clientX - ball.getBoundingClientRect().left;
+        let shiftY = eo.clientY - ball.getBoundingClientRect().top;
 
         ball.style.position = 'absolute';
         ball.style.zIndex = 1000;
