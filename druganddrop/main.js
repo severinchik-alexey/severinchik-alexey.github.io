@@ -1,6 +1,6 @@
-document.body.onmousedown = function (eo) {
-    if (eo.target.tagName = 'IMG') {
-        let ball = eo.target;
+let balls = document.querySelectorAll('img');
+for (let ball of balls) {
+    ball.onmousedown = function (eo) {
         let rec = ball.getBoundingClientRect();
         let shiftX = eo.clientX - rec.left;
         let shiftY = eo.clientY - rec.top;
@@ -10,24 +10,30 @@ document.body.onmousedown = function (eo) {
         ball.style.cursor = 'pointer';
         ball.style.width = 170 + 'px';
         document.body.append(ball);
+
         moveAt(eo.pageX, eo.pageY);
 
         function moveAt(pageX, pageY) {
             ball.style.left = pageX - shiftX + 'px';
             ball.style.top = pageY - shiftY + 'px';
         }
+
         function onMouseMove(eo) {
             moveAt(eo.pageX, eo.pageY);
         }
+
         document.addEventListener('mousemove', onMouseMove);
+
         ball.onmouseup = function () {
             document.removeEventListener('mousemove', onMouseMove);
             ball.onmouseup = null;
             ball.style.cursor = 'default';
             ball.style.width = 150 + 'px';
         };
-    }
-};
-document.body.ondragstart = function () {
-    return false;
-};
+
+    };
+
+    ball.ondragstart = function () {
+        return false;
+    };
+}
