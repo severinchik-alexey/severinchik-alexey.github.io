@@ -1,8 +1,9 @@
 document.body.onmousedown = function (eo) {
     if (eo.target.tagName === 'IMG') {
         let ball = eo.target;
-        let shiftX = eo.clientX - ball.getBoundingClientRect().left;
-        let shiftY = eo.clientY - ball.getBoundingClientRect().top;
+        let rec = ball.getBoundingClientRect();
+        let shiftX = eo.clientX - rec.left;
+        let shiftY = eo.clientY - rec.top;
 
         ball.style.position = 'absolute';
         ball.style.zIndex = 1000;
