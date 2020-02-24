@@ -1,5 +1,5 @@
 document.body.onmousedown = function (eo) {
-    if (eo.target.tagName === 'IMG') {
+    if (eo.target.tagName = 'IMG') {
         let ball = eo.target;
         let rec = ball.getBoundingClientRect();
         let shiftX = eo.clientX - rec.left;
