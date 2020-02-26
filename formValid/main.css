@@ -1,0 +1,49 @@
+.wrong {
+    border: 1px solid red;
+}
+
+.error-message {
+    font-size: 16px;
+    padding: 1px;
+    margin: 0 auto;
+    margin-left: 5px;
+    border: 1px solid #ff0000;
+    border-radius: 4px;
+    color: #ff0000;
+    background-color: #6be4607c;
+}
+form {  
+    min-width: 550px;
+    margin-bottom: 20px;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 150px auto 1fr;
+	margin-bottom: 5px;
+}
+
+.form input[type="text"] {
+	width: 400px;
+}
+
+.form input[type="number"] {
+	width: 100px;
+}
+
+.form input[type="email"] {
+    width: 200px;
+}
+
+.form select {
+    width: 200px;
+}
+
+.form textarea {
+    width: 400px;
+    height: 50px;
+}
+
+.radio {
+	grid-template-columns: 150px auto auto auto 1fr;
+}
