@@ -11,10 +11,10 @@ let game = {
     ball: null,
     platform: null,
     blocks: [],
-    rows: 4,
+    rows: 5,
     cols: 8,
-    width: 640,
-    height: 360,
+    width: 1280,
+    height: 720,
     sprites: {
         background: null,
         ball: null,
@@ -85,10 +85,10 @@ let game = {
             for (let col = 0; col < this.cols; col++) {
                 this.blocks.push({
                     active: true,
-                    width: 60,
-                    height: 20,
-                    x: 64 * col + 65,
-                    y: 24 * row + 35,
+                    width: 111,
+                    height: 39,
+                    x: 135 * col + 116,
+                    y: 55 * row + 70,
                 })
             }
         }
@@ -144,7 +144,7 @@ let game = {
         this.ctx.drawImage(this.sprites.ball, this.ball.frame * this.ball.width, 0, this.ball.width, this.ball.height, this.ball.x, this.ball.y, this.ball.width, this.ball.height);
         this.ctx.drawImage(this.sprites.platform, this.platform.x, this.platform.y);
         this.renderBlocks();
-        this.ctx.fillText('Score: ' + this.score, 15, 20);
+        this.ctx.fillText('Score: ' + this.score, 15, 43);
 
     },
 
@@ -177,13 +177,13 @@ let game = {
 };
 
 game.ball = {
-    x: 320,
-    y: 280,
-    width: 20,
-    height: 20,
+    x: 605,
+    y: 610,
+    width: 40,
+    height: 40,
     dy: 0,
     dx: 0,
-    velocity: 3,
+    velocity: 5,
     frame: 0,
 
     start() {
@@ -271,12 +271,12 @@ game.ball = {
 };
 
 game.platform = {
-    width: 100,
-    height: 14,
+    width: 251,
+    height: 41,
     velocity: 6,
     dx: 0,
-    x: 280,
-    y: 300,
+    x: 500,
+    y: 650,
     ball: game.ball,
 
     fire() {
