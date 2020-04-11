@@ -2,10 +2,246 @@
     padding: 0;
     margin: 0;
 }
+
 body {
     height: 100vh;
 }
+
 canvas {
     width: 100%;
     height: 100vh;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+    letter-spacing: 1.1px;
+}
+
+th:first-child {
+    display: block;
+    padding-right: 50px;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    background: #1c1d22;
+    font-family: "Varela Round", sans-serif;
+}
+
+#menu {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 100vh;
+    list-style: none;
+}
+
+#menu li {
+    width: 125px;
+    height: 50px;
+    -webkit-transition: background-position-x 0.9s linear;
+    transition: background-position-x 0.9s linear;
+    text-align: center;
+}
+
+#menu li a {
+    font-size: 22px;
+    color: #777;
+    text-decoration: none;
+    -webkit-transition: all 0.45s;
+    transition: all 0.45s;
+}
+
+#menu li:hover {
+    background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEi%0D%0AIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhs%0D%0AaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB3aWR0%0D%0AaD0iMzkwcHgiIGhlaWdodD0iNTBweCIgdmlld0JveD0iMCAwIDM5MCA1MCIgZW5hYmxlLWJhY2tn%0D%0Acm91bmQ9Im5ldyAwIDAgMzkwIDUwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHBhdGggZmlsbD0i%0D%0Abm9uZSIgc3Ryb2tlPSIjZDk0ZjVjIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLW1pdGVybGlt%0D%0AaXQ9IjEwIiBkPSJNMCw0Ny41ODVjMCwwLDk3LjUsMCwxMzAsMAoJYzEzLjc1LDAsMjguNzQtMzgu%0D%0ANzc4LDQ2LjE2OC0xOS40MTZDMTkyLjY2OSw0Ni41LDI0My42MDMsNDcuNTg1LDI2MCw0Ny41ODVj%0D%0AMzEuODIxLDAsMTMwLDAsMTMwLDAiLz4KPC9zdmc+Cg==");
+    -webkit-animation: line 1s;
+    animation: line 1s;
+}
+
+#menu li:hover a {
+    color: #d94f5c;
+}
+
+#menu li:not(:last-child) {
+    margin-right: 30px;
+}
+
+@-webkit-keyframes line {
+    0% {
+        background-position-x: 390px;
+    }
+}
+
+@keyframes line {
+    0% {
+        background-position-x: 390px;
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 0;
+    padding-top: 5%;
+}
+
+.modal-content {
+    height: 150px;
+    background-color: #a0608021;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    text-align: center;
+    border-radius: 50px;
+}
+
+p {
+    text-align: center;
+    color: #fff;
+}
+
+input {
+    margin-top: 40px;
+    height: 30px;
+    width: 500px;
+    font-size: 40px;
+    border-radius: 50px;
+    color: #fff;
+    background-color: rgba(75, 75, 75, 0.219);
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    height: 30px;
+    width: 100px;
+    bottom: 10px;
+    border-radius: 50px;
+}
+
+#scoreTable {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.table {
+    padding-top: 5%;
+    margin: 0 auto;
+}
+
+#scoreTable th,
+#scoreTable td {
+    border: none;
+    /* width: 100%;  */
+    margin: 0 auto;
+    font-size: 3vh;
+}
+
+table th,
+td {
+    margin-left: 50px;
+    color: #fff;
+}
+
+#close {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+}
+
+#close:hover {
+    opacity: 1;
+}
+
+#close:before,
+#close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: rgb(255, 255, 255);
+}
+
+#close:before {
+    transform: rotate(45deg);
+}
+
+#close:after {
+    transform: rotate(-45deg);
+}
+
+#close1 {
+    z-index: 9999;
+    display: none;
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+}
+
+#close1:hover {
+    opacity: 1;
+}
+
+#close1:before,
+#close1:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: rgb(255, 255, 255);
+}
+
+#close1:before {
+    transform: rotate(45deg);
+}
+
+#close1:after {
+    transform: rotate(-45deg);
+}
+
+#rules {
+    display: none;
+}
+
+#rules p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
 }

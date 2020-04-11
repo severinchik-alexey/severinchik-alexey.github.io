@@ -1,13 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arcanoid</title>
     <link rel="stylesheet" href="./main.css">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
 </head>
+
 <body>
-    <canvas id="mycanvas" width="1280" height="720"></canvas>
+    <div id="game">
+        <div id="mymodal" class='modal'>
+            <div class="modal-content">
+                <p>Введите ваш ник</p>
+                <input type="text" placeholder="Enter name..." id="input"> <br>
+                <button id="save">Принять</button>
+            </div>
+        </div>
+        <nav>
+            <ul id="menu">
+                <li><a href="#/game/" onclick="document.getElementById('close1').style.display = 'block',document.getElementById('mycanvas').style.display = 'block', document.getElementById('menu').style.display = 'none' ">Старт</a>
+                </li>
+                <li><a href="#/score" onclick="getResult(),document.getElementById('scoreTable').style.display = 'block', document.getElementById('menu').style.display = 'none' ">Результаты</a>
+                </li>
+                <li><a href="#/rules" onclick="document.getElementById('close1').style.display = 'block', getResult(),document.getElementById('rules').style.display = 'flex',document.getElementById('menu').style.display = 'none' ">Правила</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="scoreTable" style="display: none;">
+            <a href="#menu" id="close" style="color: white;" onclick="reloading()"></a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Имя игрока</th>
+                        <th>Результат</th>
+                    </tr>
+                </thead>
+                <tbody id="player-results"></tbody>
+            </table>
+        </div>
+        <div id="rules">
+            <!-- <div> -->
+            <p>В этой игре вам необходимо управлять платформой для отталкивания шара, чтобы уничтожать все блоки на своем пути <br> Для управления используются ПРОБЕЛ и стрелочки ВЛЕВО или ВПРАВО</p>
+            <!-- </div> -->
+        </div>
+        <a href="#menu" id="close1" style="color: white;" onclick="reloading()"></a>
+        <canvas style="display: none;" id="mycanvas" width="1280" height="720"></canvas>
+    </div>
     <script src="./main.js"></script>
+    <script src="./firebase.js"></script>
 </body>
+
 </html>

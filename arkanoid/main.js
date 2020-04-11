@@ -1,3 +1,4 @@
+'use strict'
 const KEYS = {
     LEFT: 37,
     RIGHT: 39,
@@ -24,6 +25,7 @@ let game = {
     sounds: {
         bump: null,
     },
+    resultData: [],
 
     init() {
         //инициализация
@@ -105,8 +107,11 @@ let game = {
 
     addScore() {
         ++this.score;
-        if (this.score >= this.blocks.length) {
-            this.end('YOU WIN!');
+        if (this.score >= this.blocks.length && game.rows <= 7) {
+            game.rows++;
+            this.create();
+        } else if (this.score >= this.blocks.length) {
+            this.end()
         }
     },
 
@@ -157,7 +162,7 @@ let game = {
         }
     },
 
-    start: function () {
+    start: function() {
         this.init();
         this.preload(() => {
             this.create();
@@ -165,10 +170,12 @@ let game = {
         });
     },
 
-    end(message) {
+    end() {
+        openModal();
         this.running = false;
-        alert(message);
-        window.location.reload();
+        // alert(message);
+        // document.getElementById('menu').style.display = 'block'
+        // document.getElementById('mycanvas').style.display = 'none';
     },
 
     random(min, max) {
@@ -210,7 +217,7 @@ game.ball = {
         }
     },
 
-    collide(element) {
+    collide(element) { // Если все 4 условия выполнены, то столкновение произошло
         let x = this.x + this.dx;
         let y = this.y + this.dy;
         if (x + this.width > element.x &&
@@ -223,7 +230,25 @@ game.ball = {
     },
 
     bumpBlock(block) {
-        this.dy *= -1;
+        let x = this.x + this.dx;
+        let y = this.y + this.dy;
+
+        let ballLeft = x;
+        let ballRight = ballLeft + this.width;
+        let ballTop = y;
+        let ballBottom = ballTop + this.height;
+
+        let blockLeft = block.width - 111;
+        let blockRight = block.width;
+        let blockTop = block.height - 39;
+        let blockBottom = block.height;
+
+
+        if (ballLeft > blockLeft && this.y < block.y || ballRight < blockRight && this.y < block.y) {
+            this.dx *= -1;
+        } else {
+            this.dy *= -1;
+        }
         block.active = false;
     },
 
@@ -264,8 +289,8 @@ game.ball = {
             this.y = 0;
             this.dy = this.velocity;
             game.sounds.bump.play();
-        } else if (ballBottom > worldBottom) {
-            game.end('YOU LOSE');
+        } else if (ballBottom >= worldBottom) {
+            game.end();
         }
     },
 };
@@ -309,7 +334,7 @@ game.platform = {
 
     getTouchOffset(x) {
         let offset = x - this.x;
-        let result = 2 * offset / this.width; 
+        let result = 2 * offset / this.width;
         return result - 1;
     },
 
@@ -329,3 +354,135 @@ game.platform = {
 window.addEventListener('load', () => {
     game.start();
 });
+
+// Моодальное окно
+
+let modal = document.getElementById('mymodal');
+let save = document.getElementById('save');
+let openModal = function() {
+        modal.style.display = "block";
+    }
+    // save.onclick = function() {
+    //     document.getElementById('menu').style.display = 'block'
+    //     document.getElementById('mycanvas').style.display = 'none';
+    //     window.location.reload();
+    // }
+
+//Таблица рекордов
+let reloading = function() {
+    window.location.reload();
+}
+save.addEventListener('click', () => {
+    // console.log('Saved: ' + input.value);
+    // let key = 'name_' + input.value;
+    // localStorage.setItem(input.value, game.score);
+    saveData();
+    // document.getElementById('result').innerHTML = localStorage.getItem(key); 
+    document.getElementById('menu').style.display = 'flex';
+    document.getElementById('mycanvas').style.display = 'none';
+    document.getElementById('mymodal').style.display = 'none';
+    setInterval(reloading, 600);
+})
+
+let saveData = function() {
+    maindb.doc(`results/player_${input.value.toLowerCase()}`).set({
+            player: `${input.value.toLowerCase()}`,
+            score: `${game.score}`,
+        })
+        .then(function() {
+            console.log('result saved');
+        })
+        .catch(function() {
+            console.log('error cannot save result: ', error);
+        });
+
+};
+
+let getResult = function() {
+    maindb.collection('results').get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                game.resultData.push(doc.data());
+                console.log(`${doc.id} => ${doc.data().player} (${doc.data().score}\)`);
+
+                let playerResults = document.getElementById('player-results'),
+                    row = document.createElement('tr'),
+                    td1 = document.createElement('td'),
+                    td2 = document.createElement('td');
+                td1.innerHTML = doc.data().player;
+                td2.innerHTML = doc.data().score;
+                row.appendChild(td1);
+                row.appendChild(td2);
+                if (playerResults) {
+                    playerResults.appendChild(row);
+                } else {
+                    document.getElementById('scoreTable').innerHTML += `
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Player name</th>
+                        <th>Result</th>
+                      </tr>
+                    </thead>
+                    <tbody id="player-results"></tbody>
+                  </table>
+                  `;
+                    playerResults = document.getElementById('player-results');
+                    playerResults.appendChild(row);
+                }
+            });
+        });
+};
+
+// let sortD = function() {
+//     let result = game.resultData;
+//     result.sort(function(a, b) {
+//         return b.score - a.score;
+//     })
+// };
+
+// let printResult = function() {
+//     if (game.resultData.length < 10) {
+//         for (let i = 0; i < game.resultData.length; i++) {
+//             let player = game.resultData[i].player;
+//             let score = game.resultData[i].score;
+//             printResultView(player);
+//             printResultView(score);
+//         }
+//     } else {
+//         for (let i = 0; i < 10; i++) {
+//             let player = game.resultData[i].player;
+//             let score = game.resultData[i].score;
+//             printResultView(player);
+//             printResultView(score);
+//         }
+//     }
+// };
+// let printResultView = function(player, score) {
+//     let playerResults = document.getElementById('player-results'),
+//         row = document.createElement('tr'),
+//         td1 = document.createElement('td'),
+//         td2 = document.createElement('td');
+//     td1.innerHTML = player;
+//     td2.innerHTML = score;
+//     row.appendChild(td1);
+//     row.appendChild(td2);
+//     if (playerResults) {
+//         playerResults.appendChild(row);
+//     } else {
+//         document.getElementById('scoreTable').innerHTML += `
+//           <table class="table">
+//             <thead>
+//               <tr>
+//                 <th>Player name</th>
+//                 <th>Result</th>
+//               </tr>
+//             </thead>
+//             <tbody id="player-results"></tbody>
+//           </table>
+//           `;
+//         playerResults = document.getElementById('player-results');
+//         playerResults.appendChild(row);
+//     }
+// };
+// printResultView();
