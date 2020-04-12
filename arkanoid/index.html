@@ -22,7 +22,7 @@
         </div>
         <nav>
             <ul id="menu">
-                <li><a href="#/game/" onclick="document.getElementById('close1').style.display = 'block',document.getElementById('mycanvas').style.display = 'block', document.getElementById('menu').style.display = 'none' ">Старт</a>
+                <li><a href="#/game/" id="start" onclick="document.getElementById('close1').style.display = 'block',document.getElementById('mycanvas').style.display = 'block', document.getElementById('menu').style.display = 'none', game.start(); ">Старт</a>
                 </li>
                 <li><a href="#/score" onclick="getResult(),document.getElementById('scoreTable').style.display = 'block', document.getElementById('menu').style.display = 'none' ">Результаты</a>
                 </li>
