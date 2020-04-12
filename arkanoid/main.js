@@ -1,10 +1,11 @@
 'use strict'
+//Присваиваем переменным коды кнопок для игры
 const KEYS = {
     LEFT: 37,
     RIGHT: 39,
     SPACE: 32,
 };
-
+//Создаем метод где вся игровая логика
 let game = {
     score: 0,
     running: true,
@@ -29,7 +30,7 @@ let game = {
 
     init() {
         //инициализация
-        this.ctx = document.getElementById('mycanvas').getContext('2d');
+        this.ctx = document.getElementById('mycanvas').getContext('2d'); //API
         this.setEvents();
         this.setTextFont();
     },
@@ -66,7 +67,7 @@ let game = {
         this.preloadSprites(onResourceLoad);
         this.preloadSounds(onResourceLoad);
     },
-
+    //Предзагрузка спрайтов из папки
     preloadSprites(onResourceLoad) {
         for (let key in this.sprites) {
             this.sprites[key] = new Image();
@@ -143,10 +144,10 @@ let game = {
     },
 
     render() {
-        //рендер
+        //рендер (отображаем все необходимые элементы игры)
         this.ctx.clearRect(0, 0, this.width, this.height);
-        this.ctx.drawImage(this.sprites.background, 0, 0);
-        this.ctx.drawImage(this.sprites.ball, this.ball.frame * this.ball.width, 0, this.ball.width, this.ball.height, this.ball.x, this.ball.y, this.ball.width, this.ball.height);
+        this.ctx.drawImage(this.sprites.background, 0, 0); // Отрисовываем фон
+        this.ctx.drawImage(this.sprites.ball, this.ball.frame * this.ball.width, 0, this.ball.width, this.ball.height, this.ball.x, this.ball.y, this.ball.width, this.ball.height); //Отрисовываем мяч
         this.ctx.drawImage(this.sprites.platform, this.platform.x, this.platform.y);
         this.renderBlocks();
         this.ctx.fillText('Score: ' + this.score, 15, 43);
@@ -161,7 +162,7 @@ let game = {
 
         }
     },
-
+    //Запуск игры
     start: function() {
         this.init();
         this.preload(() => {
@@ -350,13 +351,13 @@ game.platform = {
         }
     }
 };
-let startGame = document.getElementById('start');
-startGame.addEventListener('click', () => {
-        game.start();
-    })
-    // window.addEventListener('load', () => {
-    //     game.start();
-    // });
+// let startGame = document.getElementById('start');
+// startGame.addEventListener('click', () => {
+//         game.start();
+//     })
+// window.addEventListener('load', () => {
+//     game.start();
+// });
 
 // Моодальное окно
 
