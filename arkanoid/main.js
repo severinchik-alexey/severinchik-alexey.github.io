@@ -233,18 +233,18 @@ game.ball = {
         let x = this.x + this.dx;
         let y = this.y + this.dy;
 
-        let ballLeft = x;
-        let ballRight = ballLeft + this.width;
-        let ballTop = y;
-        let ballBottom = ballTop + this.height;
+        let ballLeft = x - this.width;
+        let ballRight = x + this.width;
+        let ballTop = y - this.height;
+        let ballBottom = y + this.height;
 
-        let blockLeft = block.width - 111;
-        let blockRight = block.width;
-        let blockTop = block.height - 39;
-        let blockBottom = block.height;
+        let blockLeft = block.x - 111;
+        let blockRight = block.x + 111;
+        let blockTop = block.y - 39;
+        let blockBottom = block.y + 39;
 
 
-        if (ballLeft > blockLeft && this.y < block.y || ballRight < blockRight && this.y < block.y) {
+        if (ballRight > blockLeft && this.y < blockBottom && this.y > blockTop || ballLeft < blockRight && this.y < blockBottom && this.y > blockTop) {
             this.dx *= -1;
         } else {
             this.dy *= -1;
