@@ -350,10 +350,13 @@ game.platform = {
         }
     }
 };
-
-window.addEventListener('load', () => {
-    game.start();
-});
+let startGame = document.getElementById('start');
+startGame.addEventListener('click', () => {
+        game.start();
+    })
+    // window.addEventListener('load', () => {
+    //     game.start();
+    // });
 
 // Моодальное окно
 
@@ -362,22 +365,12 @@ let save = document.getElementById('save');
 let openModal = function() {
         modal.style.display = "block";
     }
-    // save.onclick = function() {
-    //     document.getElementById('menu').style.display = 'block'
-    //     document.getElementById('mycanvas').style.display = 'none';
-    //     window.location.reload();
-    // }
-
-//Таблица рекордов
+    //Таблица рекордов
 let reloading = function() {
     window.location.reload();
 }
 save.addEventListener('click', () => {
-    // console.log('Saved: ' + input.value);
-    // let key = 'name_' + input.value;
-    // localStorage.setItem(input.value, game.score);
     saveData();
-    // document.getElementById('result').innerHTML = localStorage.getItem(key); 
     document.getElementById('menu').style.display = 'flex';
     document.getElementById('mycanvas').style.display = 'none';
     document.getElementById('mymodal').style.display = 'none';
@@ -433,56 +426,3 @@ let getResult = function() {
             });
         });
 };
-
-// let sortD = function() {
-//     let result = game.resultData;
-//     result.sort(function(a, b) {
-//         return b.score - a.score;
-//     })
-// };
-
-// let printResult = function() {
-//     if (game.resultData.length < 10) {
-//         for (let i = 0; i < game.resultData.length; i++) {
-//             let player = game.resultData[i].player;
-//             let score = game.resultData[i].score;
-//             printResultView(player);
-//             printResultView(score);
-//         }
-//     } else {
-//         for (let i = 0; i < 10; i++) {
-//             let player = game.resultData[i].player;
-//             let score = game.resultData[i].score;
-//             printResultView(player);
-//             printResultView(score);
-//         }
-//     }
-// };
-// let printResultView = function(player, score) {
-//     let playerResults = document.getElementById('player-results'),
-//         row = document.createElement('tr'),
-//         td1 = document.createElement('td'),
-//         td2 = document.createElement('td');
-//     td1.innerHTML = player;
-//     td2.innerHTML = score;
-//     row.appendChild(td1);
-//     row.appendChild(td2);
-//     if (playerResults) {
-//         playerResults.appendChild(row);
-//     } else {
-//         document.getElementById('scoreTable').innerHTML += `
-//           <table class="table">
-//             <thead>
-//               <tr>
-//                 <th>Player name</th>
-//                 <th>Result</th>
-//               </tr>
-//             </thead>
-//             <tbody id="player-results"></tbody>
-//           </table>
-//           `;
-//         playerResults = document.getElementById('player-results');
-//         playerResults.appendChild(row);
-//     }
-// };
-// printResultView();
