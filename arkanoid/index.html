@@ -18,11 +18,12 @@
                 <p>Введите ваш ник</p>
                 <input type="text" placeholder="Enter name..." id="input"> <br>
                 <button id="save">Принять</button>
+                <button id="back">Закрыть</button>
             </div>
         </div>
         <nav>
             <ul id="menu">
-                <li><a href="#/game/" id="start" onclick="document.getElementById('close1').style.display = 'block',document.getElementById('mycanvas').style.display = 'block', document.getElementById('menu').style.display = 'none', game.start(); ">Старт</a>
+                <li><a href="#/game/" id="start" onclick="document.getElementById('mycanvas').style.display = 'block', document.getElementById('menu').style.display = 'none', game.start(); ">Старт</a>
                 </li>
                 <li><a href="#/score" onclick="getResult(),document.getElementById('scoreTable').style.display = 'block', document.getElementById('menu').style.display = 'none' ">Результаты</a>
                 </li>
@@ -31,7 +32,7 @@
             </ul>
         </nav>
         <div id="scoreTable" style="display: none;">
-            <a href="#menu" id="close" style="color: white;" onclick="reloading()"></a>
+            <a href="#menu" id="close" style="color: white;" onclick="document.getElementById('scoreTable').style.display = 'none', document.getElementById('menu').style.display = 'flex', document.getElementById('close').style.display = 'none'"></a>
             <table class="table">
                 <thead>
                     <tr>
@@ -47,7 +48,7 @@
             <p>В этой игре вам необходимо управлять платформой для отталкивания шара, чтобы уничтожать все блоки на своем пути <br> Для управления используются ПРОБЕЛ и стрелочки ВЛЕВО или ВПРАВО</p>
             <!-- </div> -->
         </div>
-        <a href="#menu" id="close1" style="color: white;" onclick="reloading()"></a>
+        <a href="#menu" id="close1" style="color: white;" onclick="document.getElementById('rules').style.display = 'none', document.getElementById('menu').style.display = 'flex', document.getElementById('close1').style.display = 'none'"></a>
         <canvas style="display: none;" id="mycanvas" width="1280" height="720"></canvas>
     </div>
     <script src="./main.js"></script>

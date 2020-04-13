@@ -352,6 +352,11 @@ game.platform = {
 
 let modal = document.getElementById('mymodal');
 let save = document.getElementById('save');
+let back = document.getElementById('back');
+back.addEventListener('click', () => {
+    window.location.reload();
+})
+
 let openModal = function() {
         modal.style.display = "block";
     }
