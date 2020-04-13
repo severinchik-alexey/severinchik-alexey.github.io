@@ -421,3 +421,8 @@ let getResult = function() {
             });
         });
 };
+
+window.onbeforeunload = function(evt) {
+    window.event;
+    evt.returnValue = "Уверены что хотите это сделать?";
+}
