@@ -1,9 +1,9 @@
 'use strict'
 //Присваиваем переменным коды кнопок для игры
 const KEYS = {
-    LEFT: 37,
-    RIGHT: 39,
-    SPACE: 32,
+    LEFT: 37, //Стрелка влево
+    RIGHT: 39, //Стрелка вправо
+    SPACE: 32, //Пробел
 };
 //Создаем метод где вся игровая логика
 let game = {
@@ -34,12 +34,12 @@ let game = {
         this.setEvents();
         this.setTextFont();
     },
-
+    //Стилизация текста для очков (score) (слева вверху)
     setTextFont() {
         this.ctx.font = '20px Arial';
         this.ctx.fillStyle = '#FFF';
     },
-
+    // Установка обработки событий
     setEvents() {
         window.addEventListener('keydown', e => {
             if (e.keyCode === KEYS.SPACE) {
@@ -53,7 +53,7 @@ let game = {
             this.platform.stop();
         });
     },
-
+    // Предзагрузка всех ресурсов
     preload(callback) {
         let loaded = 0;
         let requred = Object.keys(this.sprites).length;
@@ -75,23 +75,23 @@ let game = {
             this.sprites[key].addEventListener('load', onResourceLoad);
         };
     },
-
+    //Предзагрузка звука из папки
     preloadSounds(onResourceLoad) {
         for (let key in this.sounds) {
             this.sounds[key] = new Audio(`sounds/${key}.mp3`);
             this.sounds[key].addEventListener('canplaythrough', onResourceLoad, { once: true });
         };
     },
-
+    //Создание блоков с указанием их размеров и координат
     create() {
-        for (let row = 0; row < this.rows; row++) {
-            for (let col = 0; col < this.cols; col++) {
-                this.blocks.push({
+        for (let row = 0; row < this.rows; row++) { //По каждоый строке
+            for (let col = 0; col < this.cols; col++) { //По каждому блоку
+                this.blocks.push({ //Пушим (добавляем) в массив блоки
                     active: true,
                     width: 111,
                     height: 39,
-                    x: 135 * col + 116,
-                    y: 55 * row + 70,
+                    x: 135 * col + 116, // На каждом этапе получим отступ между блоками и отступ от левого края экрана
+                    y: 55 * row + 70, //На каждом этапе получим отступ между блоками и отступ от верхнего края экрана
                 })
             }
         }
@@ -105,7 +105,7 @@ let game = {
         this.platform.move();
         this.ball.move();
     },
-
+    //Доавление очков при уничтожении блока
     addScore() {
         ++this.score;
         if (this.score >= this.blocks.length && game.rows <= 7) {
@@ -131,9 +131,8 @@ let game = {
             this.sounds.bump.play();
         }
     },
-
+    //Запуск (вызывает сам себя для постоянной, рекурсивной отрисовки актуальной информации)
     run() {
-        //Запуск
         if (this.running) {
             window.requestAnimationFrame(() => {
                 this.update();
@@ -145,15 +144,15 @@ let game = {
 
     render() {
         //рендер (отображаем все необходимые элементы игры)
-        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.ctx.clearRect(0, 0, this.width, this.height); // Очистка
         this.ctx.drawImage(this.sprites.background, 0, 0); // Отрисовываем фон
         this.ctx.drawImage(this.sprites.ball, this.ball.frame * this.ball.width, 0, this.ball.width, this.ball.height, this.ball.x, this.ball.y, this.ball.width, this.ball.height); //Отрисовываем мяч
-        this.ctx.drawImage(this.sprites.platform, this.platform.x, this.platform.y);
-        this.renderBlocks();
-        this.ctx.fillText('Score: ' + this.score, 15, 43);
+        this.ctx.drawImage(this.sprites.platform, this.platform.x, this.platform.y); // Отрисовка платформы
+        this.renderBlocks(); //Отрисовка блоков
+        this.ctx.fillText('Score: ' + this.score, 15, 43); // Отрисовка счетчика очков
 
     },
-
+    // Доавление блоков на экран
     renderBlocks() {
         for (let block of this.blocks) {
             if (block.active) {
@@ -164,42 +163,39 @@ let game = {
     },
     //Запуск игры
     start: function() {
-        this.init();
-        this.preload(() => {
+        this.init(); // Инициализация игры (подготовка к запуску игры)
+        this.preload(() => { // Предзагрузка
             this.create();
-            this.run();
+            this.run(); // Запуск/обновление игры после предзагрузки
         });
     },
-
+    //Конец игры
     end() {
         openModal();
         this.running = false;
-        // alert(message);
-        // document.getElementById('menu').style.display = 'block'
-        // document.getElementById('mycanvas').style.display = 'none';
     },
-
+    // Рандомный угол запуска мяча
     random(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     },
 };
 
 game.ball = {
-    x: 605,
-    y: 610,
-    width: 40,
-    height: 40,
+    x: 605, //Начасльная координата мяча по х
+    y: 610, //Начасльная координата мяча по у
+    width: 40, //Ширина мяча
+    height: 40, //Высота мяча
     dy: 0,
     dx: 0,
-    velocity: 5,
+    speed: 5, //Скорость мяча
     frame: 0,
-
+    //Запуск мяча
     start() {
-        this.dy = -this.velocity;
-        this.dx = game.random(-this.velocity, +this.velocity);
+        this.dy = -this.speed;
+        this.dx = game.random(-this.speed, +this.speed);
         this.animate();
     },
-
+    //Анимация спрайтов мяча
     animate() {
         setInterval(() => {
             ++this.frame;
@@ -217,7 +213,7 @@ game.ball = {
             this.x += this.dx;
         }
     },
-
+    //Проверка на столкновение с блоками (4 условия) - boolean функция
     collide(element) { // Если все 4 условия выполнены, то столкновение произошло
         let x = this.x + this.dx;
         let y = this.y + this.dy;
@@ -229,7 +225,7 @@ game.ball = {
         }
         return false;
     },
-
+    //Разрушение блоков и отскок мяча от них
     bumpBlock(block) {
         let x = this.x + this.dx;
         let y = this.y + this.dy;
@@ -252,18 +248,18 @@ game.ball = {
         }
         block.active = false;
     },
-
+    //Отскок мяча от платформы
     bumpPlatform(platform) {
         if (platform.dx) {
             this.x += platform.dx;
         }
         if (this.dy > 0) {
-            this.dy = -this.velocity;
+            this.dy = -this.speed;
             let touchX = this.x + this.width / 2;
-            this.dx = this.velocity * platform.getTouchOffset(touchX);
+            this.dx = this.speed * platform.getTouchOffset(touchX);
         }
     },
-
+    //Отскок мяча от краев экрана
     collideWorldBounds() {
         let x = this.x + this.dx;
         let y = this.y + this.dy;
@@ -280,15 +276,15 @@ game.ball = {
 
         if (ballLeft < worldLeft) {
             this.x = 0;
-            this.dx = this.velocity;
+            this.dx = this.speed;
             game.sounds.bump.play();
         } else if (ballRight > worldRight) {
             this.x = worldRight - this.width;
-            this.dx = -this.velocity;
+            this.dx = -this.speed;
             game.sounds.bump.play();
         } else if (ballTop < worldTop) {
             this.y = 0;
-            this.dy = this.velocity;
+            this.dy = this.speed;
             game.sounds.bump.play();
         } else if (ballBottom >= worldBottom) {
             game.end();
@@ -297,14 +293,14 @@ game.ball = {
 };
 
 game.platform = {
-    width: 251,
-    height: 41,
-    velocity: 6,
-    dx: 0,
-    x: 500,
-    y: 650,
+    width: 251, //Ширина платформы
+    height: 41, //Высота платформы
+    speed: 6, //Скорость движения платформы
+    dx: 0, // Смещение по оси Х в данный момент времени
+    x: 500, // Координата х на экране
+    y: 650, // Начальная координата у на экране
     ball: game.ball,
-
+    //Запуск мяча
     fire() {
         if (this.ball) {
             this.ball.start();
@@ -314,9 +310,9 @@ game.platform = {
 
     start(direction) {
         if (direction === KEYS.LEFT) {
-            this.dx = -this.velocity;
+            this.dx = -this.speed;
         } else if (direction === KEYS.RIGHT) {
-            this.dx = this.velocity;
+            this.dx = this.speed;
         };
     },
 
@@ -338,7 +334,7 @@ game.platform = {
         let result = 2 * offset / this.width;
         return result - 1;
     },
-
+    // Запрет выхода платформы за кра экрана
     collideWorldBounds() {
         let x = this.x + this.dx;
         let platformLeft = x;
@@ -351,13 +347,6 @@ game.platform = {
         }
     }
 };
-// let startGame = document.getElementById('start');
-// startGame.addEventListener('click', () => {
-//         game.start();
-//     })
-// window.addEventListener('load', () => {
-//     game.start();
-// });
 
 // Моодальное окно
 
