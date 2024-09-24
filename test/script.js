@@ -61,7 +61,7 @@ document.getElementById('sendToPipedrive').addEventListener('click', function() 
 // Функция для отправки данных в Pipedrive через API
 async function createDeal(dealData) {
     const apiToken = 'f54fdf1d492ab074e1b142333233aa4db7f8361e';  // Вставьте сюда ваш API-токен Pipedrive
-    const apiUrl = `https://alex4.pipedrive.com/V1/deals?api_token=${apiToken}`;  // Замените на ваш домен
+    const apiUrl = `https://cors-anywhere.herokuapp.com/https://alex4.pipedrive.com/V1/deals?api_token=${apiToken}`;  // Замените на ваш домен
 
     try {
         let response = await fetch(apiUrl, {
